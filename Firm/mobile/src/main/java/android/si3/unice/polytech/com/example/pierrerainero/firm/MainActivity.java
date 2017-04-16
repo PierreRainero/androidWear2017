@@ -1,22 +1,25 @@
 package android.si3.unice.polytech.com.example.pierrerainero.firm;
 
+import android.si3.unice.polytech.com.example.pierrerainero.firm.adapter.RecyclerAdapterForStore;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
+
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.ImageButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.wearable.MessageApi;
-import com.google.android.gms.wearable.Node;
-import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks {
-    private static final String START_ACTIVITY = "/start_activity";
-    private static final String WEAR_MESSAGE_PATH = "/message";
+import java.util.ArrayList;
+import java.util.List;
 
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks {
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private List<Store> stores;
     private GoogleApiClient mApiClient;
 
     @Override
@@ -25,41 +28,27 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         setContentView(R.layout.activity_main);
 
         initGoogleApiClient();
-
-        ImageButton comapreB = (ImageButton) findViewById(R.id.compareButton);
-        comapreB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick( View view ) {
-                String text = "Send baby";
-                if ( !TextUtils.isEmpty( text ) ) {
-                    //mAdapter.add( text );
-                    //mAdapter.notifyDataSetChanged();
-
-                    sendMessage(WEAR_MESSAGE_PATH, text);
-                }
-            }
-        });
+        initContent();
     }
 
-    private void sendMessage( final String path, final String text ) {
-        new Thread( new Runnable() {
-            @Override
-            public void run() {
-                NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mApiClient ).await();
-                for(Node node : nodes.getNodes()) {
-                    MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
-                            mApiClient, node.getId(), path, text.getBytes() ).await();
-                }
+    private void initContent(){
+        stores = new ArrayList<>();
+        Store st = new Store("Magasin 1", "28 rue des champs", "le bled", 83210, "Var", "PACA", "Super centre", "magasin cool", "http://archives.varmatin.com/media_varmatin/imagecache/article-taille-normale-nm/image/ouch/2015/02/21/50b1f4c8ed2cffb22ec8ce367f56baf1.jpg");
+        stores.add(st);
+        stores.add(st);
+        stores.add(st);
+        stores.add(st);
+        stores.add(st);
+        stores.add(st);
 
-                runOnUiThread( new Runnable() {
-                    @Override
-                    public void run() {
-                        //mEditText.setText( "" );
-                    }
-                });
-            }
-        }).start();
+        mRecyclerView = (RecyclerView) this.findViewById(R.id.shops);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new RecyclerAdapterForStore(stores, mApiClient);
+        mRecyclerView.setAdapter(mAdapter);
     }
+
 
     private void initGoogleApiClient() {
         mApiClient = new GoogleApiClient.Builder(this)
@@ -71,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        sendMessage(START_ACTIVITY, "");
+
     }
 
     @Override

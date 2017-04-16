@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:tileMode="repeat">
 
 
     <LinearLayout
@@ -13,37 +18,89 @@
 
         <ImageView
             android:id="@+id/companyLogo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="75dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shopListTitle"
+            style="@style/textEvidenceBlue"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/shops"
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_height="300dp"
+            android:layout_marginTop="6dp"/>
+
+        <View
+            style="@style/horizontalBar" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginTop="6dp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/compareButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="?android:attr/actionModeCopyDrawable" />
+                android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/openShopButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                <TextView
+                    android:id="@+id/compareTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/compareLib"
+                    style="@style/textBlue"/>
+
+                <ImageButton
+                    android:id="@+id/compareButton"
+                    style="@style/buttonBleu"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/compare" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_search_category_default" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/analyzeTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/analyzeLib"
+                    style="@style/textBlue"/>
+
+                <ImageButton
+                    android:id="@+id/openShopButton"
+                    style="@style/buttonBleu"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/analyze" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

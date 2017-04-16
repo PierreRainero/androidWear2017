@@ -1,11 +1,51 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#64a4d2</item>
+    </style>
+
+    <style name="textEvidenceWhite">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+    </style>
+
+    <style name="textEvidenceBlack">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FF000000</item>
+    </style>
+
+    <style name="textEvidenceBlue">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#64a4d2</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="buttonBleu" >
+        <item name="android:textColor">#64a4d2</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">?android:selectableItemBackground</item>
+    </style>
+
+    <style name="textBlue">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textColor">#64a4d2</item>
+    </style>
+
+    <style name="horizontalBar">
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">#CC64a4d2</item>
     </style>
 
 </resources>
