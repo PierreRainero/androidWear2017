@@ -1,12 +1,10 @@
 apply plugin: 'com.android.application'
 
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-
     defaultConfig {
-        applicationId "android.si3.unice.polytech.com.example.pierrerainero.wearapp"
+        applicationId "android.si3.unice.polytech.com.example.pierrerainero.firm"
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 1

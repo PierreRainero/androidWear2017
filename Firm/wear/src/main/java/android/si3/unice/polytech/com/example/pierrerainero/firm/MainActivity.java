@@ -1,4 +1,4 @@
-package android.si3.unice.polytech.com.example.pierrerainero.wearapp;
+package android.si3.unice.polytech.com.example.pierrerainero.firm;
 
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
