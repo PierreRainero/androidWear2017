@@ -5,8 +5,6 @@ import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.util.AsyncTaskImage;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.util.Serializer;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +16,6 @@ import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -30,7 +26,6 @@ public class RecyclerAdapterForStore extends RecyclerView.Adapter<StoreViewHolde
     private List<Store> stores;
     private GoogleApiClient mApiClient;
     private static final String WEAR_MESSAGE_PATH = "/message";
-    private int position;
 
     public RecyclerAdapterForStore(List<Store> stores, GoogleApiClient mApiClient){
         this.stores = stores;
@@ -47,8 +42,7 @@ public class RecyclerAdapterForStore extends RecyclerView.Adapter<StoreViewHolde
 
     @Override
     public void onBindViewHolder(StoreViewHolder holder, final int pos) {
-        this.position = pos;
-        Store currentStore = stores.get(position);
+        Store currentStore = stores.get(pos);
 
         holder.viewName.setText(currentStore.getName());
         holder.viewMallName.setText(currentStore.getMallName());
@@ -56,16 +50,11 @@ public class RecyclerAdapterForStore extends RecyclerView.Adapter<StoreViewHolde
         holder.viewWearButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View view ) {
-                /*String text = stores.get(position).getName();
-                if ( !TextUtils.isEmpty( text ) ) {*/
                 try {
-                    Log.e("Position wear btn", position+"");
-                    Log.e("Name was : ", stores.get(position).getName());
-                    sendMessage(WEAR_MESSAGE_PATH, Serializer.serialize(stores.get(position)));
+                    sendMessage(WEAR_MESSAGE_PATH, Serializer.serialize(stores.get(pos)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                // }
             }
         });
 
