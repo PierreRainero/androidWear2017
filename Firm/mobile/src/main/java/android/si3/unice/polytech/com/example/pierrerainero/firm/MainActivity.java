@@ -1,6 +1,8 @@
 package android.si3.unice.polytech.com.example.pierrerainero.firm;
 
 import android.si3.unice.polytech.com.example.pierrerainero.firm.adapter.RecyclerAdapterForStore;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.database.FirmBD;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Firm;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
 
 import android.support.annotation.Nullable;
@@ -12,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.Wearable;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<Store> stores;
+    private Firm firm;
     private GoogleApiClient mApiClient;
 
     @Override
@@ -32,20 +36,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     private void initContent(){
-        stores = new ArrayList<>();
-        Store st = new Store("Magasin 1", "28 rue des champs", "le bled", 83210, "Var", "PACA", "Super centre", "magasin cool", "http://archives.varmatin.com/media_varmatin/imagecache/article-taille-normale-nm/image/ouch/2015/02/21/50b1f4c8ed2cffb22ec8ce367f56baf1.jpg");
-        stores.add(st);
-        stores.add(st);
-        stores.add(st);
-        stores.add(st);
-        stores.add(st);
-        stores.add(st);
+        FirmBD db = new FirmBD(this);
+        try {
+            db.createDataBase();
+            db.openDataBase();
+            firm = db.getFirm();
+            db.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         mRecyclerView = (RecyclerView) this.findViewById(R.id.shops);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new RecyclerAdapterForStore(stores, mApiClient);
+        mAdapter = new RecyclerAdapterForStore(firm.getStores(), mApiClient);
         mRecyclerView.setAdapter(mAdapter);
     }
 

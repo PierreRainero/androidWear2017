@@ -1,12 +1,13 @@
 package android.si3.unice.polytech.com.example.pierrerainero.firm.model;
 
 
+import java.io.Serializable;
 
 /**
  * Class that represent a store
  *
  */
-public class Store {
+public class Store implements Serializable {
     private String name;
     private String address;
     private String city;
@@ -16,12 +17,6 @@ public class Store {
     private String image;
     private String region;
     private String department;
-    /**
-     * Default constructor for a store
-     */
-    public Store() {
-        this(null, null, null, -1, null, null, null, null, null);
-    }
 
     /**
      * Constructor for a store
@@ -36,7 +31,7 @@ public class Store {
      * @param image url to the store image
 
      */
-    public Store(String name, String address, String city, int cityNumber, String department, String region, String mallName, String description, String image) {
+    public Store(String name, String address, String city, int cityNumber , String mallName, String description, String image, String region, String department) {
         this.name = name;
         this.address = address;
         this.city=city;

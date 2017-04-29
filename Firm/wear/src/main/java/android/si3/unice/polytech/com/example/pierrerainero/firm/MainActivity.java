@@ -2,8 +2,11 @@ package android.si3.unice.polytech.com.example.pierrerainero.firm;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.util.Serializer;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -15,6 +18,7 @@ import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Wearable;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -69,7 +73,16 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
             @Override
             public void run() {
                 if( messageEvent.getPath().equalsIgnoreCase( WEAR_MESSAGE_PATH ) ) {
-                    mAdapter.add(new String(messageEvent.getData()));
+                    Store st = null;
+                    try {
+                        st = (Store) Serializer.deserialize(messageEvent.getData());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    if(st!=null)
+                        mAdapter.add(st.getName());
                     mAdapter.notifyDataSetChanged();
                 }
             }
