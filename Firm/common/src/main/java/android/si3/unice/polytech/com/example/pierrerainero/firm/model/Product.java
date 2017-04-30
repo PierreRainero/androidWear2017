@@ -1,10 +1,14 @@
 package android.si3.unice.polytech.com.example.pierrerainero.firm.model;
 
+import android.si3.unice.polytech.com.example.pierrerainero.firm.exception.ProductException;
+
+import java.io.Serializable;
+
 /**
  * Class that represents a commercialized product
  *
  */
-public class Product {
+public class Product implements Serializable {
     private String name;
     private String reference;
     private String description;
@@ -13,36 +17,30 @@ public class Product {
     private boolean flagship = false;
     private String image ="";
 
-
-
-    public Product(){
-        this(null,null,0.0);
-    }
-
     /**
      * Constructor for mandatory parameter of a product
      * @param name the name
      * @param reference the reference
      * @param price the price
      */
-    public Product(String name, String reference, double price) {
+    public Product(String name, String reference, double price) throws ProductException {
+        if(reference==null)
+            throw new ProductException("Reference can't be null.");
+
         this.name = name;
         this.reference = reference;
         this.price = price;
+        this.image = "";
     }
 
 
-    public Product(String name, String reference, String description, double price) {
-        this.name = name;
-        this.reference = reference;
+    public Product(String name, String reference, String description, double price) throws ProductException {
+        this(name, reference, price);
         this.description = description;
-        this.price = price;
     }
 
-    public Product(String name, String reference, double price, String image) {
-        this.name = name;
-        this.reference = reference;
-        this.price = price;
+    public Product(String name, String reference, double price, String image) throws ProductException {
+        this(name, reference, price);
         this.image = image;
     }
 
@@ -53,12 +51,11 @@ public class Product {
      * @param description the description of the product
      * @param price the price of the product
      */
-    public Product(String name, String image, String reference, String description, double price) {
-        this.name = name;
+    public Product(String name, String image, String reference, String description, double price, boolean promoted, boolean flagship) throws ProductException {
+        this(name, reference, price, description);
         this.image = image;
-        this.reference = reference;
-        this.description = description;
-        this.price = price;
+        this.promoted = promoted;
+        this.flagship = flagship;
     }
 
 
@@ -167,5 +164,17 @@ public class Product {
      */
     public boolean isFlagship(){
     	return flagship;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof Product) || ((Product) obj).getReference()!= reference)
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString(){
+        return reference + " : " + name;
     }
 }

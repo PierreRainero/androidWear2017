@@ -2,21 +2,34 @@ package android.si3.unice.polytech.com.example.pierrerainero.firm.model;
 
 
 import java.io.Serializable;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Class that represent a store
  *
  */
-public class Store implements Serializable {
+public class Store implements Serializable, Comparable<Store> {
     private String name;
+    private String description;
+    private String image;
+
     private String address;
     private String city;
     private int cityNumber;
     private String mallName;
-    private String description;
-    private String image;
     private String region;
     private String department;
+
+    private double turnover;
+    private double cost;
+    private int employeeNb;
+
+    private int rank;
+    private int lastRank;
+
+    private Map<Product, Map.Entry<Double, Double>> productsProfit;
 
     /**
      * Constructor for a store
@@ -29,9 +42,11 @@ public class Store implements Serializable {
      * @param mallName the name of the mall where the store is
      * @param description the description of the store
      * @param image url to the store image
-
+     * @param turnover turnover of the store
+     * @param cost cost of maintenance of the store
+     * @param employeeNb number of employees of the store
      */
-    public Store(String name, String address, String city, int cityNumber , String mallName, String description, String image, String region, String department) {
+    public Store(String name, String address, String city, int cityNumber , String mallName, String description, String image, String region, String department, double turnover, double cost, int employeeNb) {
         this.name = name;
         this.address = address;
         this.city=city;
@@ -41,38 +56,14 @@ public class Store implements Serializable {
         this.image = image;
         this.region = region;
         this.department=department;
-    }
+        this.turnover = turnover;
+        this.cost = cost;
+        this.employeeNb = employeeNb;
 
-    /**
-     * Allow to change the name of the store
-     * @param newName the new name
-     */
-    public void changeStoreName(String newName){
-        name=newName;
-    }
+        rank = 0;
+        lastRank = 0;
 
-    /**
-     * Allow to change the description of the store
-     * @param newDescription the new description
-     */
-    public void changeStoreDescription(String newDescription){
-        description = newDescription;
-    }
-
-    /**
-     * Allow to change the name of the mall where the store is
-     * @param newMallName the new name
-     */
-    public void changeStoreMallName(String newMallName){
-        mallName=newMallName;
-    }
-
-    /**
-     * Allow the change the address of the store
-     * @param newAddress the new address
-     */
-    public void changeStoreAddress(String newAddress){
-        address=newAddress;
+        productsProfit = new HashMap<>();
     }
 
     /**
@@ -114,13 +105,6 @@ public class Store implements Serializable {
     public String getImage() {
         return image;
     }
-
-    /**
-     * Allow to change the image url of the store
-     */
-    public void changeStoreImage(String newImage){
-        image=newImage;
-    }
     
     /**
      * Getter for the city where the store is located
@@ -128,14 +112,6 @@ public class Store implements Serializable {
      */
     public String getCity() {
         return city;
-    }
-    
-    /**
-     * Allow to change the city of the store
-     * @param city the new city
-     */
-    public void changeStoreCity(String city){
-    	this.city=city;
     }
 
     /**
@@ -145,14 +121,6 @@ public class Store implements Serializable {
     public int getCityNumber() {
         return cityNumber;
     }
-    
-    /**
-     * Allow to change the city number of the store
-     * @param cityNumber the new city number
-     */
-    public void changeCityNumber(int cityNumber){
-    	this.cityNumber=cityNumber;
-    }
 
     /**
      * Getter for the region where the store is located
@@ -160,14 +128,6 @@ public class Store implements Serializable {
      */
     public String getRegion() {
         return region;
-    }
-    
-    /**
-     * Allow to change the region name of the store
-     * @param regionName the new region name
-     */
-    public void changeRegionName(String regionName){
-    	this.region=regionName;
     }
 
     /**
@@ -177,13 +137,89 @@ public class Store implements Serializable {
     public String getDepartment() {
         return department;
     }
-    
-    /**
-     * Allow to change the departement of the store
-     * @param depart the new departement
-     */
-    public void changeDepartement(String depart){
-    	this.department=depart;
+
+    public double getTurnover() {
+        return turnover;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public int getEmployeeNb() {
+        return employeeNb;
+    }
+
+    public double getProfit(){
+        return turnover - cost;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public int getLastRank() {
+        return lastRank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public void setLastRank(int lastRank) {
+        this.lastRank = lastRank;
+    }
+
+    public void addProduct(Product product, double gain, double cost){
+        productsProfit.put(product, new AbstractMap.SimpleEntry<>(gain, cost));
+    }
+
+    public double getProductProfit(Product product){
+        return productsProfit.get(product).getKey() - productsProfit.get(product).getValue();
+    }
+
+    public Product getBestProduct(){
+        Product returnValue = null;
+        double bestProfit = Double.MIN_VALUE;
+
+        for(Product product : productsProfit.keySet()){
+            double tmpProfit = getProductProfit(product);
+            if(bestProfit<tmpProfit){
+                bestProfit = tmpProfit;
+                returnValue = product;
+            }
+        }
+
+        return  returnValue;
+    }
+
+    public Product getWorstProduct(){
+        Product returnValue = null;
+        double bestProfit = Double.MAX_VALUE;
+
+        for(Product product : productsProfit.keySet()){
+            double tmpProfit = getProductProfit(product);
+            if(bestProfit>tmpProfit){
+                bestProfit = tmpProfit;
+                returnValue = product;
+            }
+        }
+        return  returnValue;
+    }
+
+    @Override
+    public int compareTo(Store store) {
+        if(getProfit()==store.getProfit())
+            return 0;
+        if(getProfit()>store.getProfit())
+            return -1;
+        else
+            return 1;
+    }
+
+    @Override
+    public Store clone(){
+        return this;
     }
 }
 

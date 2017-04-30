@@ -5,8 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.R;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.exception.ProductException;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Firm;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Product;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
+import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -102,61 +106,62 @@ public class FirmBD extends SQLiteOpenHelper {
     }
 
     public Firm getFirm(){
-        Firm firm = new Firm("","","","","");
+        Firm firm = new Firm(myContext.getString(R.string.app_name), myContext.getString(R.string.description));
+        generateProducts(firm);
+
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM store ORDER BY id ASC", null);
 
         for(int i=0; i<cursor.getCount();i++){
             cursor.moveToPosition(i);
-            String name = cursor.getString(1);
-            String address = cursor.getString(2);
-            String city = cursor.getString(3);
-            int cityNumber = cursor.getInt(4);
-            String mallName = cursor.getString(5);
-            String description = cursor.getString(6);
-            String image = cursor.getString(7);
-            String region = cursor.getString(8);
-            String department = cursor.getString(9);
 
-            firm.addStore(new Store(name, address, city, cityNumber, mallName, description, image, region, department));
+            Store store = new Store(cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getInt(4),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    cursor.getString(7),
+                    cursor.getString(8),
+                    cursor.getString(9),
+                    cursor.getDouble(10),
+                    cursor.getDouble(11),
+                    cursor.getInt(12));
+            generateProductProfit(firm, cursor.getInt(0), store);
+
+            firm.addStore(store);
         }
 
+        firm.rankStoreByProfit();
         return firm;
     }
 
-    /*public List<Article> getAllArticles(){
-        List<Article> returnArticles = new ArrayList<>();
-        Cursor cursor = myDataBase.rawQuery("SELECT * FROM news ORDER BY date DESC", null);
+    private void generateProducts(Firm firm){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM product ORDER BY reference ASC", null);
+
+        for(int i=0; i<cursor.getCount();i++) {
+            cursor.moveToPosition(i);
+
+            String reference = cursor.getString(0);
+            boolean promoted = (cursor.getInt(4)==0)? false : true;
+            boolean flagship = (cursor.getInt(5)==0)? false : true;
+
+            Product product = null;
+            try {
+                product = new Product(cursor.getString(1), cursor.getString(6), reference, cursor.getString(2), cursor.getDouble(3), promoted, flagship);
+            } catch (ProductException e) {
+                e.printStackTrace();
+            }
+            firm.addProduct(reference, product);
+        }
+    }
+
+    private void generateProductProfit(Firm firm, int id, Store store){
+        Cursor cursor = myDataBase.rawQuery("SELECT referenceProduct, gain, cost FROM products_profit WHERE idStore="+id, null);
 
         for(int i=0; i<cursor.getCount();i++){
             cursor.moveToPosition(i);
-            int id = cursor.getInt(7);
-            String titre = cursor.getString(0);
-            String auteur = cursor.getString(2);
-            Date date = null;
-            try {
-                date = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")).parse(cursor.getString(3));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
 
-            Categorie cat = null;
-            if(cursor.getInt(4)==1)
-                cat = Categorie.POLITIQUE;
-            else if(cursor.getInt(4)==2)
-                cat = Categorie.SOCIETE;
-
-            Media media = null;
-            if(cursor.getInt(5)==0)
-                media = Media.IMAGE;
-            else if(cursor.getInt(5)==1)
-                media = Media.VIDEO;
-
-            String mediaUrl = cursor.getString(6);
-
-            returnArticles.add(new Article(id,titre, auteur, date, cat, media, mediaUrl));
+            store.addProduct(firm.getProduct(cursor.getString(0)), cursor.getDouble(1), cursor.getDouble(2));
         }
-
-        cursor.close();
-        return returnArticles;
-    }*/
+    }
 }

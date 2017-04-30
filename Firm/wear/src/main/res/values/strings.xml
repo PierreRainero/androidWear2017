@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ToBeOrToHave</string>
+    <string name="benef">Bénéfices :</string>
+    <string name="rank">Classement :</string>
+    <string name="employee">Nombre d\'employés :</string>
+    <string name="best">Meilleur produit :</string>
+    <string name="worst">Pire produit :</string>
+    <string name="base">Pour afficher la synthèse d\'un magasin veuillez cliquer sur l\'image suivante du magasin souhaité :</string>
 </resources>

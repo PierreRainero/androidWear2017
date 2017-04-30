@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">ToBeOrToHave</string>
+    <string name="description">Vendeur divers : livres, cd, dvd, stages de développement personnel...</string>
     <string name="shopListTitle">Liste des magasins</string>
     <string name="compareLib">Comparer</string>
     <string name="analyzeLib">Analyser</string>

@@ -11,8 +11,8 @@ import java.io.ObjectOutputStream;
  */
 
 public class Serializer {
-    private Serializer(){
 
+    private Serializer(){
     }
 
     public static byte[] serialize(Object obj) throws IOException {
