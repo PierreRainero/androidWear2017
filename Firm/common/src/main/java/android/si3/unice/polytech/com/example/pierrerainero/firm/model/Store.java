@@ -26,6 +26,9 @@ public class Store implements Serializable, Comparable<Store> {
     private double cost;
     private int employeeNb;
 
+    private double longitude;
+    private double latitude;
+
     private int rank;
     private int lastRank;
 
@@ -46,7 +49,7 @@ public class Store implements Serializable, Comparable<Store> {
      * @param cost cost of maintenance of the store
      * @param employeeNb number of employees of the store
      */
-    public Store(String name, String address, String city, int cityNumber , String mallName, String description, String image, String region, String department, double turnover, double cost, int employeeNb) {
+    public Store(String name, String address, String city, int cityNumber , String mallName, String description, String image, String region, String department, double turnover, double cost, int employeeNb, double longitude, double latitude) {
         this.name = name;
         this.address = address;
         this.city=city;
@@ -59,6 +62,8 @@ public class Store implements Serializable, Comparable<Store> {
         this.turnover = turnover;
         this.cost = cost;
         this.employeeNb = employeeNb;
+        this.longitude = longitude;
+        this.latitude =  latitude;
 
         rank = 0;
         lastRank = 0;
@@ -160,6 +165,14 @@ public class Store implements Serializable, Comparable<Store> {
 
     public int getLastRank() {
         return lastRank;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 
     public void setRank(int rank) {

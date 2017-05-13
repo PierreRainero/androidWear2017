@@ -125,7 +125,9 @@ public class FirmBD extends SQLiteOpenHelper {
                     cursor.getString(9),
                     cursor.getDouble(10),
                     cursor.getDouble(11),
-                    cursor.getInt(12));
+                    cursor.getInt(12),
+                    cursor.getDouble(13),
+                    cursor.getDouble(14));
             generateProductProfit(firm, cursor.getInt(0), store);
 
             firm.addStore(store);

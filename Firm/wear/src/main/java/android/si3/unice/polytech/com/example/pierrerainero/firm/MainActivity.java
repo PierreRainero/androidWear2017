@@ -1,11 +1,16 @@
 package android.si3.unice.polytech.com.example.pierrerainero.firm;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.util.Serializer;
 import android.support.wearable.activity.WearableActivity;
+import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -20,6 +25,7 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
     private GoogleApiClient mApiClient;
 
     private boolean firstMessageReceived;
+    private Store selectedStore;
 
     private TextView storeName;
     private TextView profit;
@@ -66,7 +72,6 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
             @Override
             public void run() {
                 if( messageEvent.getPath().equalsIgnoreCase( WEAR_MESSAGE_PATH ) ) {
-                    Store selectedStore = null;
                     try {
                         selectedStore = (Store) Serializer.deserialize(messageEvent.getData());
                     } catch (IOException e) {
@@ -81,7 +86,7 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
                     }
 
                     if(selectedStore!=null)
-                        updateSelectedStore(selectedStore);
+                        updateSelectedStore();
                 }
             }
         });
@@ -95,23 +100,32 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
         nbEmployee = (TextView) findViewById(R.id.employeeValue);
         bestProduct = (TextView) findViewById(R.id.bestValue);
         worstProduct = (TextView) findViewById(R.id.worstValue);
+        ImageButton openMaps = (ImageButton) this.findViewById(R.id.mapButton);
+        openMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View view ) {
+                Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
+                myIntent.putExtra("store", selectedStore);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
     }
 
-    private void updateSelectedStore(Store store){
-        storeName.setText(store.getName());
+    private void updateSelectedStore(){
+        storeName.setText(selectedStore.getName());
 
-        double benef = store.getProfit();
+        double benef = selectedStore.getProfit();
         profit.setText(String.format("%.2f", benef)+" €");
         if(benef>0)
             profit.setTextColor(Color.parseColor("#4da34d"));
         else
             profit.setTextColor(Color.parseColor("#f01000"));
 
-        rank.setText(store.getRank()+"/"+store.getLastRank());
+        rank.setText(selectedStore.getRank()+"/"+selectedStore.getLastRank());
 
-        nbEmployee.setText(String.valueOf(store.getEmployeeNb()));
-        bestProduct.setText(store.getBestProduct().toString());
-        worstProduct.setText(store.getWorstProduct().toString());
+        nbEmployee.setText(String.valueOf(selectedStore.getEmployeeNb()));
+        bestProduct.setText(selectedStore.getBestProduct().toString());
+        worstProduct.setText(selectedStore.getWorstProduct().toString());
     }
 
     @Override

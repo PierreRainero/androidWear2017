@@ -10,12 +10,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.Wearable;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks {
     private RecyclerView mRecyclerView;
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private RecyclerView.LayoutManager mLayoutManager;
     private Firm firm;
     private GoogleApiClient mApiClient;
+    private List<Integer> selectedStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private void initContent(){
         FirmBD db = new FirmBD(this);
+        selectedStore = new ArrayList<>();
         try {
             db.createDataBase();
             db.openDataBase();
@@ -50,8 +56,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new RecyclerAdapterForStore(firm.getStores(), mApiClient);
+        mAdapter = new RecyclerAdapterForStore(firm.getStores(), mApiClient, selectedStore);
         mRecyclerView.setAdapter(mAdapter);
+
+        ImageButton analyzeBtn = (ImageButton) this.findViewById(R.id.openShopButton);
+        analyzeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selectedStore.size()==1)
+                    Log.e("ST", "OUI");
+                else
+                    Log.e("ST", "NON");
+            }
+        });
     }
 
 

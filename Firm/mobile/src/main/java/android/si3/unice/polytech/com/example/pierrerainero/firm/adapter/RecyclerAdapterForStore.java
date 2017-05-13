@@ -26,10 +26,12 @@ public class RecyclerAdapterForStore extends RecyclerView.Adapter<StoreViewHolde
     private List<Store> stores;
     private GoogleApiClient mApiClient;
     private static final String WEAR_MESSAGE_PATH = "/message";
+    private List<Integer> selectorsList;
 
-    public RecyclerAdapterForStore(List<Store> stores, GoogleApiClient mApiClient){
+    public RecyclerAdapterForStore(List<Store> stores, GoogleApiClient mApiClient, List<Integer> selectorsList){
         this.stores = stores;
         this.mApiClient = mApiClient;
+        this.selectorsList = selectorsList;
     }
 
     @Override
@@ -57,9 +59,22 @@ public class RecyclerAdapterForStore extends RecyclerView.Adapter<StoreViewHolde
                 }
             }
         });
+        holder.viewSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View view ) {
+                changeSelectorState(pos);
+            }
+        });
 
         AsyncTaskImage async = new AsyncTaskImage(holder.viewImage);
         async.execute(currentStore.getImage());
+    }
+
+    private void changeSelectorState(int pos){
+        if(selectorsList.contains(pos))
+            selectorsList.remove((Object) pos);
+        else if(!selectorsList.contains(pos))
+            selectorsList.add(pos);
     }
 
     private void sendMessage( final String path, final byte[] obj ) {
