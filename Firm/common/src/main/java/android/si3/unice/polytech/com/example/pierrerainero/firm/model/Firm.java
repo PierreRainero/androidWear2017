@@ -1,10 +1,9 @@
 package android.si3.unice.polytech.com.example.pierrerainero.firm.model;
 
-import android.si3.unice.polytech.com.example.pierrerainero.firm.util.Cloner;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -124,11 +123,57 @@ public class Firm implements Serializable {
     }
 
     public void rankStoreByProfit(){
-        List<Store> tmp = Cloner.cloneStoreList(stores);
-        Collections.sort(tmp);
+        Collections.sort(stores, new Comparator<Store>(){
+            public int compare(Store one, Store two) {
+                if(one.getProfit()==two.getProfit())
+                    return 0;
+                if(one.getProfit()>two.getProfit())
+                    return -1;
+                else
+                    return 1;
+            }
+        });
         for(int i=0; i<stores.size();i++){
             stores.get(i).setLastRank(stores.size());
-            stores.get(i).setRank(tmp.indexOf(stores.get(i))+1);
+            stores.get(i).setRank(i+1);
         }
+    }
+
+    public void rankStoreByCity(){
+        Collections.sort(stores, new Comparator<Store>(){
+            public int compare(Store one, Store two) {
+                return compareString(one.getCity(), two.getCity());
+            }
+        });
+    }
+    
+    public void rankStoreByDepartement() {
+        Collections.sort(stores, new Comparator<Store>(){
+            public int compare(Store one, Store two) {
+                return compareString(one.getDepartment(), two.getDepartment());
+            }
+        });
+    }
+
+    public void rankStoreByRegion() {
+        Collections.sort(stores, new Comparator<Store>(){
+            public int compare(Store one, Store two) {
+                return compareString(one.getRegion(), two.getRegion());
+            }
+        });
+    }
+
+    private int compareString(String one, String two){
+        for(int i=0;i<one.length();i++){
+            if(i==two.length())
+                return -1;
+
+            if(one.charAt(i)<two.charAt(i))
+                return -1;
+
+            if(one.charAt(i)>two.charAt(i))
+                return 1;
+        }
+        return 0;
     }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
  * Class that represent a store
  *
  */
-public class Store implements Serializable, Comparable<Store> {
+public class Store implements Serializable {
     private String name;
     private String description;
     private String image;
@@ -218,21 +218,6 @@ public class Store implements Serializable, Comparable<Store> {
             }
         }
         return  returnValue;
-    }
-
-    @Override
-    public int compareTo(Store store) {
-        if(getProfit()==store.getProfit())
-            return 0;
-        if(getProfit()>store.getProfit())
-            return -1;
-        else
-            return 1;
-    }
-
-    @Override
-    public Store clone(){
-        return this;
     }
 }
 

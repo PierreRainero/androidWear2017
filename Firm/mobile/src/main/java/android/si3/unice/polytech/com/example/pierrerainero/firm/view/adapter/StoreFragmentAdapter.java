@@ -1,6 +1,6 @@
-package android.si3.unice.polytech.com.example.pierrerainero.firm.adapter;
+package android.si3.unice.polytech.com.example.pierrerainero.firm.view.adapter;
 
-import android.si3.unice.polytech.com.example.pierrerainero.firm.fragment.StoreFragment;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.view.fragment.StoreFragment;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Firm;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
 import android.support.v4.app.Fragment;

@@ -1,4 +1,4 @@
-package android.si3.unice.polytech.com.example.pierrerainero.firm.adapter;
+package android.si3.unice.polytech.com.example.pierrerainero.firm.view.adapter;
 
 import android.si3.unice.polytech.com.example.pierrerainero.firm.R;
 import android.support.v7.widget.RecyclerView;

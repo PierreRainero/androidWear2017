@@ -5,17 +5,30 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <android.support.wearable.view.DismissOverlayView
-        android:id="@+id/dismiss_overlay"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Search" />
+        android:layout_height="match_parent">
 
+        <android.support.wearable.view.DismissOverlayView
+            android:id="@+id/dismiss_overlay"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/Search" />
+
+        <ImageButton
+            android:id="@+id/returnButton"
+            android:background="@drawable/retour"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="30dp"/>
+
+    </RelativeLayout>
 </FrameLayout>

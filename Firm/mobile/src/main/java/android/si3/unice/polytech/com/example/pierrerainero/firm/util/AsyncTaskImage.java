@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
+ * Allows to load an image without being blocking
  * Created by PierreRainero on 16/04/2017.
  */
 
@@ -22,6 +23,9 @@ public class AsyncTaskImage extends AsyncTask<String, Void, Bitmap> {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected Bitmap doInBackground(String... urls) {
         Bitmap bitmapImage = null;
         try {
@@ -36,6 +40,9 @@ public class AsyncTaskImage extends AsyncTask<String, Void, Bitmap> {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onPostExecute(Bitmap bitmapImage) {
         imageViewToUpdate.setImageBitmap(bitmapImage);
     }

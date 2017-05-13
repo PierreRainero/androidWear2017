@@ -25,6 +25,7 @@ import java.util.List;
 
 
 /**
+ * Allows to generate datas from a DB file
  * Created by PierreRainero on 29/04/2017.
  */
 
@@ -128,7 +129,7 @@ public class FirmBD extends SQLiteOpenHelper {
                     cursor.getInt(12),
                     cursor.getDouble(13),
                     cursor.getDouble(14));
-            generateProductProfit(firm, cursor.getInt(0), store);
+            generateProductProfit(cursor.getInt(0), store);
 
             firm.addStore(store);
         }
@@ -157,7 +158,7 @@ public class FirmBD extends SQLiteOpenHelper {
         }
     }
 
-    private void generateProductProfit(Firm firm, int id, Store store){
+    private void generateProductProfit(int id, Store store){
         Cursor cursor = myDataBase.rawQuery("SELECT referenceProduct, gain, cost FROM products_profit WHERE idStore="+id, null);
 
         for(int i=0; i<cursor.getCount();i++){

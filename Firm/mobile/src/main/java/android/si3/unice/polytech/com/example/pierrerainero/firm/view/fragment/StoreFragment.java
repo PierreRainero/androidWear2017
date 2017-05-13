@@ -1,6 +1,6 @@
-package android.si3.unice.polytech.com.example.pierrerainero.firm.fragment;
+package android.si3.unice.polytech.com.example.pierrerainero.firm.view.fragment;
 
-import android.si3.unice.polytech.com.example.pierrerainero.firm.adapter.RecyclerAdapterForProduct;
+import android.si3.unice.polytech.com.example.pierrerainero.firm.view.adapter.RecyclerAdapterForProduct;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.util.AsyncTaskImage;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.view.Formator;
 import android.support.v4.app.Fragment;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
+ * Fragment (view) for a store
  * Created by PierreRainero on 13/05/2017.
  */
 
@@ -26,21 +27,29 @@ public class StoreFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private static Store currentStore;
+    private static List<Store> stores;
     private static Firm firm;
+
+    public static final String POSITION = "position";
 
     public StoreFragment() {}
 
-    public static StoreFragment newInstance(int pos,  List<Store> stores, Firm dfirm) {
+    public static StoreFragment newInstance(int pos,  List<Store> dstores, Firm dfirm) {
         StoreFragment myFrag = new StoreFragment();
-        currentStore = stores.get(pos);
+        stores = dstores;
         firm = dfirm;
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(POSITION, pos);
+        myFrag.setArguments(bundle);
 
         return myFrag;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.store_fragment, container, false);
+        int index = getArguments().getInt(POSITION);
+        Store currentStore = stores.get(index);
 
         TextView storeName = (TextView) rootView.findViewById(R.id.storeName);
         TextView description = (TextView) rootView.findViewById(R.id.descriptionShop);

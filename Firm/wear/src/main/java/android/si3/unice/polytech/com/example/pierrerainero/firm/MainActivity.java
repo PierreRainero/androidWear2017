@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.util.Serializer;
 import android.support.wearable.activity.WearableActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -20,6 +18,10 @@ import com.google.android.gms.wearable.Wearable;
 
 import java.io.IOException;
 
+/**
+ * Main activity for the wear module
+ * Created by PierreRainero
+ */
 public class MainActivity extends WearableActivity implements MessageApi.MessageListener, GoogleApiClient.ConnectionCallbacks {
     private static final String WEAR_MESSAGE_PATH = "/message";
     private GoogleApiClient mApiClient;
@@ -35,6 +37,9 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
     private TextView worstProduct;
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_empty);
@@ -44,6 +49,9 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
         initGoogleApiClient();
     }
 
+    /**
+     * Initializes the GoogleApi (for receive and send message to the mobile)
+     */
     private void initGoogleApiClient() {
         mApiClient = new GoogleApiClient.Builder( this )
                 .addApi( Wearable.API )
@@ -55,6 +63,9 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onResume() {
         super.onResume();
         if( mApiClient != null && !( mApiClient.isConnected() || mApiClient.isConnecting() ) )
@@ -62,11 +73,17 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onStart() {
         super.onStart();
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public void onMessageReceived( final MessageEvent messageEvent ) {
         runOnUiThread( new Runnable() {
             @Override
@@ -92,6 +109,9 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
         });
     }
 
+    /**
+     * Change the xml layout to display a store
+     */
     private void initNewScene(){
         setContentView(R.layout.activity_main);
         storeName = (TextView) findViewById(R.id.storeName);
@@ -111,6 +131,9 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
         });
     }
 
+    /**
+     * Update the view with the new datas for the selected store
+     */
     private void updateSelectedStore(){
         storeName.setText(selectedStore.getName());
 
@@ -129,11 +152,17 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public void onConnected(Bundle bundle) {
         Wearable.MessageApi.addListener( mApiClient, this );
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onStop() {
         if ( mApiClient != null ) {
             Wearable.MessageApi.removeListener( mApiClient, this );
@@ -145,6 +174,9 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onDestroy() {
         if( mApiClient != null )
             mApiClient.unregisterConnectionCallbacks( this );
@@ -152,6 +184,9 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public void onConnectionSuspended(int i) {
 
     }
