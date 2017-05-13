@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="6dp">
+
+    <TextView
+        android:id="@+id/bandeauSup"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#CC64a4d2" />
+
+    <TextView
+        android:id="@+id/storeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        style="@style/textEvidenceWhite"/>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/bandeauSup"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@drawable/border"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/imageShop"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/image"/>
+
+                <TextView
+                    android:id="@+id/descriptionShop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|right"
+                    style="@style/textBlue"/>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/storeInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/infos"
+                style="@style/textEvidenceBlue"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/imgAddress"
+                    android:layout_width="24dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/address" />
+
+                <TextView
+                    android:id="@+id/addressStore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/textBlue"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+
+                <ImageView
+                    android:id="@+id/imgRank"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/classement" />
+
+                <TextView
+                    android:id="@+id/rankStore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/textBlue"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+
+                <ImageView
+                    android:id="@+id/imgEmployes"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/employes" />
+
+                <TextView
+                    android:id="@+id/employeesStore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/textBlue"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+                <ImageView
+                    android:id="@+id/imgBenefStore"
+                    android:layout_width="24dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/argent" />
+
+                <TextView
+                    android:id="@+id/benefStore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/textBlue"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/productsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/products"
+                style="@style/textEvidenceBlue"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/products"
+                android:scrollbars="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="6dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

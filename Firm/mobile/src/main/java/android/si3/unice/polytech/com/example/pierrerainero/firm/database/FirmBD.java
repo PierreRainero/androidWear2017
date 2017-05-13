@@ -163,7 +163,7 @@ public class FirmBD extends SQLiteOpenHelper {
         for(int i=0; i<cursor.getCount();i++){
             cursor.moveToPosition(i);
 
-            store.addProduct(firm.getProduct(cursor.getString(0)), cursor.getDouble(1), cursor.getDouble(2));
+            store.addProduct(cursor.getString(0), cursor.getDouble(1), cursor.getDouble(2));
         }
     }
 }

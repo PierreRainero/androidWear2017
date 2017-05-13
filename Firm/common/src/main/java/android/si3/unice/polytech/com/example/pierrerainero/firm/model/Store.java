@@ -32,7 +32,7 @@ public class Store implements Serializable, Comparable<Store> {
     private int rank;
     private int lastRank;
 
-    private Map<Product, Map.Entry<Double, Double>> productsProfit;
+    private Map<String, Map.Entry<Double, Double>> productsProfit;
 
     /**
      * Constructor for a store
@@ -183,38 +183,38 @@ public class Store implements Serializable, Comparable<Store> {
         this.lastRank = lastRank;
     }
 
-    public void addProduct(Product product, double gain, double cost){
-        productsProfit.put(product, new AbstractMap.SimpleEntry<>(gain, cost));
+    public void addProduct(String productReference, double gain, double cost){
+        productsProfit.put(productReference, new AbstractMap.SimpleEntry<>(gain, cost));
     }
 
-    public double getProductProfit(Product product){
-        return productsProfit.get(product).getKey() - productsProfit.get(product).getValue();
+    public double getProductProfit(String productReference){
+        return productsProfit.get(productReference).getKey() - productsProfit.get(productReference).getValue();
     }
 
-    public Product getBestProduct(){
-        Product returnValue = null;
+    public String getBestProduct(){
+        String returnValue = null;
         double bestProfit = Double.MIN_VALUE;
 
-        for(Product product : productsProfit.keySet()){
-            double tmpProfit = getProductProfit(product);
+        for(String productReference : productsProfit.keySet()){
+            double tmpProfit = getProductProfit(productReference);
             if(bestProfit<tmpProfit){
                 bestProfit = tmpProfit;
-                returnValue = product;
+                returnValue = productReference;
             }
         }
 
         return  returnValue;
     }
 
-    public Product getWorstProduct(){
-        Product returnValue = null;
+    public String getWorstProduct(){
+        String returnValue = null;
         double bestProfit = Double.MAX_VALUE;
 
-        for(Product product : productsProfit.keySet()){
-            double tmpProfit = getProductProfit(product);
+        for(String productReference : productsProfit.keySet()){
+            double tmpProfit = getProductProfit(productReference);
             if(bestProfit>tmpProfit){
                 bestProfit = tmpProfit;
-                returnValue = product;
+                returnValue = productReference;
             }
         }
         return  returnValue;

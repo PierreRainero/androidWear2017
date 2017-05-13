@@ -4,4 +4,8 @@
     <string name="shopListTitle">Liste des magasins</string>
     <string name="compareLib">Comparer</string>
     <string name="analyzeLib">Analyser</string>
+    <string name="products">Produits</string>
+    <string name="separator">-</string>
+    <string name="benef">Bénéfices :</string>
+    <string name="infos">Infos</string>
 </resources>

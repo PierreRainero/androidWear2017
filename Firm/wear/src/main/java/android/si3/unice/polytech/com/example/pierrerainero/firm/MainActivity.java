@@ -124,8 +124,8 @@ public class MainActivity extends WearableActivity implements MessageApi.Message
         rank.setText(selectedStore.getRank()+"/"+selectedStore.getLastRank());
 
         nbEmployee.setText(String.valueOf(selectedStore.getEmployeeNb()));
-        bestProduct.setText(selectedStore.getBestProduct().toString());
-        worstProduct.setText(selectedStore.getWorstProduct().toString());
+        bestProduct.setText(selectedStore.getBestProduct());
+        worstProduct.setText(selectedStore.getWorstProduct());
     }
 
     @Override

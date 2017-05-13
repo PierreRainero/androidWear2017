@@ -27,8 +27,8 @@ public class MapActivity extends WearableActivity implements OnMapReadyCallback,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        Store selectedStore = (Store) intent.getSerializableExtra("store");
+
+        Store selectedStore = (Store) getIntent().getSerializableExtra("store");
         coord = new LatLng(selectedStore.getLatitude(), selectedStore.getLongitude());
         setContentView(R.layout.activity_map);
 

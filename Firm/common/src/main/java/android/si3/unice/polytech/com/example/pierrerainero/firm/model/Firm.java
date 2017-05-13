@@ -2,6 +2,7 @@ package android.si3.unice.polytech.com.example.pierrerainero.firm.model;
 
 import android.si3.unice.polytech.com.example.pierrerainero.firm.util.Cloner;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.Map;
  * Class that represent a firm
  *
  */
-public class Firm {
+public class Firm implements Serializable {
     private String name;
     private String description;
     private List<Store> stores;
@@ -116,6 +117,10 @@ public class Firm {
 
     public Product getProduct(String reference){
         return products.get(reference);
+    }
+
+    public List<Product> getProducts(){
+        return new ArrayList<Product>(products.values());
     }
 
     public void rankStoreByProfit(){

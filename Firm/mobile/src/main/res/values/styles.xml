@@ -48,4 +48,9 @@
         <item name="android:background">#CC64a4d2</item>
     </style>
 
+    <style name="card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
 </resources>

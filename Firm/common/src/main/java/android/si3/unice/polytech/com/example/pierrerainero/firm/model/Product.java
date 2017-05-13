@@ -33,17 +33,6 @@ public class Product implements Serializable {
         this.image = "";
     }
 
-
-    public Product(String name, String reference, String description, double price) throws ProductException {
-        this(name, reference, price);
-        this.description = description;
-    }
-
-    public Product(String name, String reference, double price, String image) throws ProductException {
-        this(name, reference, price);
-        this.image = image;
-    }
-
     /**
      * Constructor for a product
      * @param name the name of the product
@@ -52,7 +41,8 @@ public class Product implements Serializable {
      * @param price the price of the product
      */
     public Product(String name, String image, String reference, String description, double price, boolean promoted, boolean flagship) throws ProductException {
-        this(name, reference, price, description);
+        this(name, reference, price);
+        this.description = description;
         this.image = image;
         this.promoted = promoted;
         this.flagship = flagship;
