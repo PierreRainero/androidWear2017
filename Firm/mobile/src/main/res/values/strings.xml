@@ -8,4 +8,11 @@
     <string name="separator">-</string>
     <string name="benef">Bénéfices :</string>
     <string name="infos">Infos</string>
+    <string name="economie">Economie</string>
+    <string name="warning">Attention</string>
+    <string name="oneStoreMini">"Vous devez sélectionner au minimum un magasin à afficher !"</string>
+    <string name="byProfit">Par bénéfice</string>
+    <string name="byCity">Par ville</string>
+    <string name="byDepartment">Par département</string>
+    <string name="byRegion">Par région</string>
 </resources>

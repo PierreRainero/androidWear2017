@@ -1,5 +1,6 @@
 package android.si3.unice.polytech.com.example.pierrerainero.firm;
 
+import android.content.Context;
 import android.content.Intent;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.view.activity.CompareStoresActivity;
 import android.si3.unice.polytech.com.example.pierrerainero.firm.view.adapter.RecyclerAdapterForStore;
@@ -8,6 +9,7 @@ import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Firm;
 
 import android.si3.unice.polytech.com.example.pierrerainero.firm.model.Store;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -71,13 +73,21 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         fillListView();
 
         ImageButton compareBtn = (ImageButton) this.findViewById(R.id.compareButton);
+        final Context context = this;
         compareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(selectedStore.isEmpty()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle(getString(R.string.warning));
+                    builder.setMessage(getString(R.string.oneStoreMini));
+                    builder.show();
+                }else{
                     Intent myIntent = new Intent(MainActivity.this, CompareStoresActivity.class);
                     myIntent.putExtra("storesIndex", storesToCompare());
                     myIntent.putExtra("firm", firm);
                     MainActivity.this.startActivity(myIntent);
+                }
             }
         });
     }
@@ -87,12 +97,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
      */
     private void initSpin(){
         Spinner storeSpin = (Spinner) this.findViewById(R.id.storeSelector);
-        List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("Par bénéfice");
-        spinnerArray.add("Par ville");
-        spinnerArray.add("Par département");
-        spinnerArray.add("Par région");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        List<String> spinnerArray =  new ArrayList<>();
+        spinnerArray.add(getString(R.string.byProfit));
+        spinnerArray.add(getString(R.string.byCity));
+        spinnerArray.add(getString(R.string.byDepartment));
+        spinnerArray.add(getString(R.string.byRegion));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         storeSpin.setAdapter(adapter);
 

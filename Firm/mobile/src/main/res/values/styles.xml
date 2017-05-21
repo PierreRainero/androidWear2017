@@ -13,11 +13,27 @@
         <item name="android:textColor">#FFFFFFFF</item>
     </style>
 
+    <style name="textEvidenceWhiteT">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="textEvidenceBlack">
         <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingTop">3dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FF000000</item>
+    </style>
+
+    <style name="textEvidenceBlackT">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:textSize">26sp</item>
     </style>
 
     <style name="textEvidenceBlue">
@@ -28,6 +44,14 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="textEvidenceBlueT">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#64a4d2</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
     <style name="buttonBleu" >
         <item name="android:textColor">#64a4d2</item>
         <item name="android:padding">2dp</item>
@@ -35,10 +59,51 @@
         <item name="android:background">?android:selectableItemBackground</item>
     </style>
 
+    <style name="buttonBleuT" >
+        <item name="android:textColor">#64a4d2</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="textBlue">
         <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingTop">3dp</item>
         <item name="android:textColor">#64a4d2</item>
+    </style>
+
+    <style name="textBlueT">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textColor">#64a4d2</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textGreen">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textColor">#4da34d</item>
+    </style>
+
+    <style name="textRed">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textColor">#f01000</item>
+    </style>
+
+    <style name="textGreenT">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textColor">#4da34d</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textRedT">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:textColor">#f01000</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="horizontalBar">

@@ -27,6 +27,7 @@ public class CompareStoresActivity extends AppCompatActivity {
         setContentView(R.layout.compare_stores_activity);
 
         Intent intent = getIntent();
+        //System.out.println(getResources().getConfiguration().orientation);
         stores = (ArrayList<Store>) intent.getSerializableExtra("storesIndex");
         firm = (Firm) intent.getSerializableExtra("firm");
         initContent();
