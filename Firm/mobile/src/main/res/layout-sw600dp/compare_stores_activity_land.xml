@@ -3,12 +3,20 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:tag="sw600dp"
+    android:weightSum="1.0">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/storeFrag"
-        android:layout_width="match_parent"
+        android:layout_weight=".5"
+        android:layout_width="0dip"
         android:layout_height="wrap_content" />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/storeFrag2"
+        android:layout_weight=".5"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

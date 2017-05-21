@@ -191,6 +191,10 @@ public class Store implements Serializable {
         return productsProfit.get(productReference).getKey() - productsProfit.get(productReference).getValue();
     }
 
+    public double getProductGain(String productReference){
+        return productsProfit.get(productReference).getKey();
+    }
+
     public String getBestProduct(){
         String returnValue = null;
         double bestProfit = Double.MIN_VALUE;

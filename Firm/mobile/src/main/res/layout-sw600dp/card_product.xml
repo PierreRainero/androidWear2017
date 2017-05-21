@@ -8,7 +8,7 @@
         android:id="@+id/card_view"
         android:layout_margin="8dp"
         style="@style/card"
-        android:layout_height="320dp">
+        android:layout_height="180dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,7 +68,7 @@
 
                         <TextView
                             android:id="@+id/descriptionProduct"
-                            style="@style/textBlueT"
+                            style="@style/textBlueTmn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />

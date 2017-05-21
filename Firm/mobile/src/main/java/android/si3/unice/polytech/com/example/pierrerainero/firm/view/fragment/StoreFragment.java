@@ -102,7 +102,7 @@ public class StoreFragment extends Fragment {
         List<SliceValue> values = new ArrayList<>();
         for(int i = 0; i < firm.getProducts().size(); i++){
             String ref = firm.getProducts().get(i).getReference();
-            SliceValue sliceValue = new SliceValue((float) (currentStore.getProductProfit(ref)/currentStore.getProfit()), getColor(firm.getProducts().get(i)));
+            SliceValue sliceValue = new SliceValue((float)(currentStore.getProductGain(ref)/currentStore.getTurnover()), getColor(firm.getProducts().get(i)));
             sliceValue.setLabel(ref);
             values.add(sliceValue);
         }
@@ -133,13 +133,12 @@ public class StoreFragment extends Fragment {
 
         @Override
         public void onValueSelected(int arcIndex, SliceValue value) {
-            Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), value.getValue()*100 + " %", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onValueDeselected() {
             // TODO Auto-generated method stub
-
         }
 
     }
