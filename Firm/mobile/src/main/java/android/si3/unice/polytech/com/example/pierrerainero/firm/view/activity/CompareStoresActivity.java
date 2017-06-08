@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -53,10 +54,9 @@ public class CompareStoresActivity extends AppCompatActivity {
         fragment = (ViewPager)findViewById(R.id.storeFrag);
         fragment2 = (ViewPager)findViewById(R.id.storeFrag2);
 
-        List<Store> stores1 = copyStores();
-        List<Store> stores2 = copyStores();
-        stores1.remove(1);
-        stores2.remove(0);
+        List<Store> stores1 = new ArrayList<>(stores);
+        List<Store> stores2 = new ArrayList<>(stores);
+        Collections.swap(stores2, 0, 1);
 
         initContent(fragment, stores1);
         initContent(fragment2, stores2);
@@ -66,13 +66,5 @@ public class CompareStoresActivity extends AppCompatActivity {
     private void initContent(ViewPager pager, List<Store> storesToDisplay){
         adapter = new StoreFragmentAdapter(getSupportFragmentManager(), storesToDisplay, firm);
         pager.setAdapter(adapter);
-    }
-
-    private List<Store> copyStores(){
-        List<Store> returnV = new ArrayList<>();
-        for(int i=0;i<stores.size();i++){
-            returnV.add(stores.get(i));
-        }
-        return returnV;
     }
 }
